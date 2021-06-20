@@ -20,3 +20,45 @@ cv2.imshow("gov Resize",imgResize)
 blurimgResize = cv2.blur(imgResize,(10,10))
 cv2.imshow('blurred image',blurimgResize)
 cv2.imshow('gov.jpg',imgResize)
+
+#make three copy of one image in three diffrernt view..
+import cv2
+import numpy as np
+img = cv2.imread('leaf.jpg')  #download image from browser
+
+print(np.shape(img))  # Print the img variable dimension in format of original image height and width
+print(img.shape)
+width ,height =300 ,300
+imgResize = cv2.resize(img,(width,height)) #resize image
+print(imgResize.shape)
+
+cv2.imshow("gov Resize",imgResize)#print image
+
+blurimgResize = cv2.blur(imgResize,(10,10))  #blur image display
+cv2.imshow('blurred image',blurimgResize)
+cv2.imshow('leaf.jpg',imgResize)
+
+#CONVERT Original image in BGR format
+
+lower_range = np.array([0,0,0])  # Set the Lower range value of color in BGR
+upper_range = np.array([100,70,255])   # Set the Upper range value of color in BGR
+mask = cv2.inRange(img,lower_range,upper_range) # Create a mask with range
+result = cv2.bitwise_and(img,img,mask = mask)  # Performing bitwise and operation with mask in img variable
+
+cv2.imshow('gov.jpg',result) # Image after bitwise operation
+
+
+#Convert image into Gray Format
+bw = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)  # Converting the Orginal image to Gray
+bw_bgr = cv2.cvtColor(bw,cv2.COLOR_GRAY2BGR) # Converting the Gray image to BGR format
+result2 = cv2.bitwise_or(bw_bgr,result) # Performing Bitwise OR operation with gray bgr image and previous result image
+
+cv2.imshow('gov.jpg',result2)  # Showing The Final Result Image'''
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+
+
+
